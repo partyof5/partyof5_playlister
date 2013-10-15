@@ -2,18 +2,24 @@ require_relative './spec_helper'
 
 describe "Song" do
   it "can initialize a song" do
-    pending #implement this spec
+    Song.new.should be_an_instance_of(Song)
   end
 
   it "can have a name" do
-    pending #implement this spec
+    song = Song.new
+    song.name = "Rolling in the Deep"
+    song.name.should eq("Rolling in the Deep")
   end
 
   it "can have a genre" do
-    pending #implement this spec
+    genre = Genre.new
+    genre.name = 'folk'
+    genre.name.should eq('folk')
   end
 
   it "has an artist" do
-    pending #implement this spec
+    artist = Artist.new
+    artist.name = "Adele"
+    artist.name.should eq("Adele")
   end
 end
