@@ -13,7 +13,6 @@ class Artist
   end
 
   def add_song_object_by_name(song_name)
-    # taking a string and creating a song object. Then adding it to Artist.songs array
     song = Song.new
     song.name = song_name
     add_song(song)
@@ -36,6 +35,5 @@ class Artist
   def self.count
     @@artists.size
   end
-
 
 end

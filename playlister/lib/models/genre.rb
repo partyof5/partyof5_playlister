@@ -1,11 +1,12 @@
 class Genre
-  attr_accessor :name
-  
+  attr_accessor :name, :songs, :artists
 
+  @@genres = []
 
   def initialize
     @songs = []
     @artists = []
+    @@genres << self if !@@genres.include?(self)
   end
 
   def songs=(songs)
@@ -27,7 +28,9 @@ class Genre
     @artists
   end
 
+# To do last 3 rspec tests
   def ==(other_genre)
     self.name == other_genre.name
   end
+  
 end
