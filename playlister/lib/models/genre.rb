@@ -3,18 +3,11 @@ class Genre
 
   @@genres = []
 
-  def initialize
+  def initialize(name = nil)
+    @name = name
     @songs = []
     @artists = []
     @@genres << self if !@@genres.include?(self)
-  end
-
-  def songs=(songs)
-    @songs = songs
-  end
-
-  def songs
-    @songs
   end
 
   def artists=(artists)
@@ -26,6 +19,19 @@ class Genre
       song.artist
     end
     @artists
+  end
+
+  def self.all
+    @@genres
+  end
+
+  def self.count
+    @@genres.uniq!
+    @@genres.size
+  end
+
+  def self.reset_genres
+    @@genres.clear
   end
 
 # To do last 3 rspec tests
