@@ -33,19 +33,21 @@ class LibraryParser
     a.add_song_object_by_name(self.call.last[1])
   end
 
-
+  def add_objects
+    self.call.collect do |mini_array|
+      a = Artist.new
+      a.name = mini_array[0]
+      a.add_song_object_by_name(mini_array[1])
+      
+    end
+  end
 end
 
 
-
-# in CLI:  parser = LibraryParser = new
+# load './config/environment.rb'
+# in CLI:  parser = LibraryParser.new
 # create new instance of LibraryParser
 # parser.call
-
-# break array into multi-dimensional array
-
-
-# use artist, song and genre classes to iterate and gather all relevant data
 
 
 

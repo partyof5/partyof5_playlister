@@ -26,7 +26,6 @@ class Genre
   end
 
   def self.count
-    @@genres.uniq!
     @@genres.size
   end
 
