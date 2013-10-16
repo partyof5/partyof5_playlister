@@ -25,7 +25,7 @@ class Artist
   end
 
   def url
-    self.name.gsub(" ", "_").join(".html")
+    "#{self.name.downcase.gsub(" ", "_")}.html"
   end
 
   def self.reset_artists
