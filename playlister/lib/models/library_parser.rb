@@ -27,18 +27,12 @@ class LibraryParser
     end
   end
 
-  def add_artists
-    a = Artist.new
-    a.name = self.call.last[0]
-    a.add_song_object_by_name(self.call.last[1])
-  end
-
   def add_objects
-    self.call.collect do |mini_array|
-      a = Artist.new
-      a.name = mini_array[0]
-      a.add_song_object_by_name(mini_array[1])
-      
+    self.parse(files).collect do |mini_array|
+      song = Song.new
+      song.name = mini_array[1]
+      song.artist = Artist.find_or_create_by_name(mini_array[0])
+      song.genre = Genre.find_or_create_by_name(mini_array[2])     
     end
   end
 end
@@ -49,6 +43,11 @@ end
 # create new instance of LibraryParser
 # parser.call
 
-
+# tap example:
+    # Genre.new.tap{|g| g.name = string}
+    # return a new genre that has the name string
+    # g = Genre.new
+    # g.name = string    
+    # g
 
 

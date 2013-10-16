@@ -36,4 +36,16 @@ class Artist
     @@artists.size
   end
 
+  def self.find_or_create_by_name(string)
+     find_by_name(string) || create_by_name(string)
+  end
+
+  def self.find_by_name(string)
+    @@artists.detect{|g| g.name == string}
+  end
+
+  def self.create_by_name(string)
+    Artist.new.tap{|g| g.name = string}
+  end
+
 end

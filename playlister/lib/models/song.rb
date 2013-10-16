@@ -1,6 +1,8 @@
 class Song
   attr_accessor :name, :genre, :artist
 
+  @@songs = []
+
   def genre=(genre)
     @genre = genre
     # need access to genre just assigned and song that was just assigned to
@@ -11,5 +13,8 @@ class Song
     @genre
   end
 
+  def self.all
+    @@songs
+  end
 
 end
