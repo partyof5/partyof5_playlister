@@ -24,6 +24,10 @@ class Artist
     end
   end
 
+  def url
+    self.name.gsub(" ", "_").join(".html")
+  end
+
   def self.reset_artists
     @@artists.clear
   end

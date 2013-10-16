@@ -1,3 +1,7 @@
-class SiteGenerator
+require_relative '../config/environment.rb'
 
-end
+parser = LibraryParser.new
+parser.call
+
+s = SiteGenerator.new
+s.call
