@@ -16,6 +16,10 @@ class Genre
     end
   end
 
+  def url
+    "#{self.name.downcase.gsub(" ", "_")}.html"
+  end
+
   def self.all
     @@genres
   end

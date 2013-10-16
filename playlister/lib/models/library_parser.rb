@@ -33,6 +33,7 @@ class LibraryParser
       song.artist = Artist.find_or_create_by_name(mini_array[0])
       song.genre = Genre.find_or_create_by_name(mini_array[2])   
       song.name = mini_array[1]
+      song.artist.add_song(song)
       song
     end
   end
