@@ -8,7 +8,7 @@ class LibraryParser
   end
 
   def call
-    parse(files)
+    self.add_objects
   end
 
   def files
