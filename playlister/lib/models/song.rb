@@ -3,9 +3,12 @@ class Song
 
   @@songs = []
 
+  def initialize
+    @@songs << self
+  end
+
   def genre=(genre)
     @genre = genre
-    # need access to genre just assigned and song that was just assigned to
     genre.songs << self
   end
 
@@ -15,6 +18,10 @@ class Song
 
   def self.all
     @@songs
+  end
+
+  def self.find_by_name(string)
+    @@songs.detect{|s| s.name.downcase == string.downcase}
   end
 
 end

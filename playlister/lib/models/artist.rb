@@ -41,11 +41,11 @@ class Artist
   end
 
   def self.find_by_name(string)
-    @@artists.detect{|g| g.name == string}
+    @@artists.detect{|a| a.name == string}
   end
 
   def self.create_by_name(string)
-    Artist.new.tap{|g| g.name = string}
+    Artist.new.tap{|a| a.name = string}
   end
 
 end

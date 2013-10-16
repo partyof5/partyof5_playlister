@@ -30,24 +30,12 @@ class LibraryParser
   def add_objects
     self.parse(files).collect do |mini_array|
       song = Song.new
-      song.name = mini_array[1]
       song.artist = Artist.find_or_create_by_name(mini_array[0])
-      song.genre = Genre.find_or_create_by_name(mini_array[2])     
+      song.genre = Genre.find_or_create_by_name(mini_array[2])   
+      song.name = mini_array[1]
+      song
     end
   end
+
 end
-
-
-# load './config/environment.rb'
-# in CLI:  parser = LibraryParser.new
-# create new instance of LibraryParser
-# parser.call
-
-# tap example:
-    # Genre.new.tap{|g| g.name = string}
-    # return a new genre that has the name string
-    # g = Genre.new
-    # g.name = string    
-    # g
-
 
