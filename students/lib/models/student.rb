@@ -1,5 +1,26 @@
 class Student
-	attr_accessor :name, :image, :title, :blurb, :saved_to_db, :id
+  ATTRIBUTES = {
+    :id => "INTEGER PRIMARY AUTO INCREMENT",
+    :name => "TEXT",
+    :image => "TEXT",
+    :title => "TEXT",
+    :blurb => "TEXT"
+  }
+ 
+  def self.attributes_hash
+    ATTRIBUTES
+  end
+ 
+  def self.attributes
+    ATTRIBUTES.keys
+  end
+
+  def self.attributes_for_db
+    ATTRIBUTES.keys.reject { |k| k == :id }
+  end
+ 
+  attr_accessor *attributes_for_db, :saved_to_db
+  attr_reader :id
 
   if File.exists?('students.db')
     File.delete('students.db')
@@ -17,8 +38,13 @@ class Student
 
 # ================ Instance Level Methods ================= #
 
-  def initialize
+  def initialize(id = nil)
   	@saved_to_db = false
+    @id = id 
+  end
+
+  def nefarious_setter(id)
+    @id = id
   end
 
   def insert
@@ -26,7 +52,7 @@ class Student
     result = @@db.execute(sql, self.name, self.image, self.title, self.blurb)
     sql = "SELECT id FROM students WHERE name = ? ORDER BY id DESC LIMIT 1"
     result = @@db.execute(sql, self.name)
-    self.id = result.flatten.first
+    id = result.flatten.first
     saved_to_db!
   end
 
@@ -60,8 +86,7 @@ class Student
 	end
 
   def self.new_from_db(row)
-    s = Student.new
-    s.id = row[0]
+    s = Student.new(row[0])
     s.name = row[1]
     s.image = row[2]
     s.title = row[3]
@@ -79,3 +104,13 @@ class Student
 
 
 end
+
+
+
+
+
+
+
+
+
+
