@@ -23,11 +23,11 @@ describe Student do
     end
 
     describe ".save" do
-      it "chooses the right thing on first save" do
+      it "performs insert if hasn't been saved yet" do
         @student.should_receive(:insert)
         @student.save
       end
-      it "chooses the right thing after saving" do
+      it "performs update if it has already been saved" do
         @student.save
         @student.name = "Steven"
         @student.should_receive(:update)
