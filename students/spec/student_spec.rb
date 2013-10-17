@@ -38,7 +38,6 @@ describe Student do
     describe "::find" do
       it "finds the student from the database" do
         @student.save
-        binding.pry
         loaded = Student.find(@student.id)
         loaded.name.should eq(@student.name)
         loaded.id.should eq(@student.id)

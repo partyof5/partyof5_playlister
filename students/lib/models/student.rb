@@ -19,14 +19,17 @@ class Student
     ATTRIBUTES.keys.reject { |k| k == :id }
   end
  
-  attr_accessor *attributes_for_db, :saved_to_db
-  attr_reader :id
+  attr_accessor *attributes, :saved_to_db
+
+  @@all_students = []
 
   if File.exists?('students.db')
     File.delete('students.db')
   end
 
 	@@db = SQLite3::Database.new "students.db"
+
+  def create_table
   @@db.execute %Q{
     CREATE TABLE students (
     	id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -35,16 +38,14 @@ class Student
       title TEXT,
       blurb TEXT)
   }
+  end
 
 # ================ Instance Level Methods ================= #
 
   def initialize(id = nil)
   	@saved_to_db = false
     @id = id 
-  end
-
-  def nefarious_setter(id)
-    @id = id
+    @@all_students << self
   end
 
   def insert
@@ -52,7 +53,7 @@ class Student
     result = @@db.execute(sql, self.name, self.image, self.title, self.blurb)
     sql = "SELECT id FROM students WHERE name = ? ORDER BY id DESC LIMIT 1"
     result = @@db.execute(sql, self.name)
-    id = result.flatten.first
+    self.id = result.flatten.first
     saved_to_db!
   end
 
@@ -83,6 +84,9 @@ class Student
 # ================== Class Level Methods ================== #
 
 	def self.reset_all
+    @@all_students.clear
+    @@db.execute("DROP TABLE students")
+    create_table
 	end
 
   def self.new_from_db(row)
@@ -102,6 +106,9 @@ class Student
   	found_student = self.new_from_db(result)
   end
 
+  def self.all
+    @@all_students 
+  end
 
 end
 
